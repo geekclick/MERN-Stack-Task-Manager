@@ -5,7 +5,7 @@ const routes = require("./src/Routes/index");
 // middlewares
 const errorMiddleware = require('./src/Middlewares/error-middleware')
 
-const connectionDB = require('./src/db/db');
+const connectionDB = require('./src/DB/db');
 const cors = require('cors');
 
 const corsOptions = {
