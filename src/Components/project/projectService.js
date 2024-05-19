@@ -7,9 +7,7 @@ class ProjectService {
         const user = await User.findById(payload.user_id)
         if (user) {
             const project = await new Project({ ...payload, owner: user._id })
-            console.log(project)
             await project.save()
-            console.log(project)
 
             user.projects.push(project)
             await user.save()
@@ -20,15 +18,15 @@ class ProjectService {
         } else return null
     }
 
-    async projectList() {
+    async projectList(token) {
         const projectList = await Project.find();
         if (projectList) {
-            return projectList
+            const userProjectList = projectList.filter((p) => p.owner == token._id)
+            return userProjectList;
         } else return null
     }
 
     async updateProject(id) {
-        console.log(id)
         const project = await Project.findOne({ _id: id })
         if (project) {
             const updated = {

@@ -6,7 +6,6 @@ const authMiddleware = () => async (req, res, next) => {
     try {
         const authHeader = req.headers['authorization'];
         const token = authHeader && authHeader.split(' ')[1];
-        console.log(token)
         if (!token) {
             return res.status(401).json({ error: 'Unauthorized: No token provided' });
         }
@@ -23,7 +22,6 @@ const authMiddleware = () => async (req, res, next) => {
 
             // Extract user information from decoded token
             req.user = decodedToken;
-            console.log(req)
 
             // Continue to the next middleware or route handler
             next();

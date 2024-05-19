@@ -49,7 +49,6 @@ export const profile = async (dispatch: Dispatch<any>) => {
 export const getUser = async (dispatch: Dispatch<any>) => {
   try {
     const userId = localStorage.getItem("userId");
-    console.log(userId);
     const response = await axios.post(
       `${window.location.origin}/api/users/${userId}`
     );

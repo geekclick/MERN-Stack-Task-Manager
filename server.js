@@ -10,10 +10,9 @@ const cors = require('cors');
 
 const corsOptions = {
     origin: "http://localhost:5173",
-    methods: "POST ,GET, DELETE, PATCH, HEAD",
+    methods: "POST, GET, DELETE, PATCH, HEAD",
     credentials: true,
 };
-
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -21,13 +20,22 @@ app.use(errorMiddleware);
 routes(app);
 
 const path = require("path");
-app.get("/", (req, res) => {
-    app.use(express.static(path.resolve(__dirname, "client", "dist")));
-    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-});
+const clientDistPath = path.resolve(__dirname, "client", "dist");
+app.use(express.static(clientDistPath));
+
+const serveIndexFile = (req, res) => {
+    res.sendFile(path.join(clientDistPath, "index.html"));
+};
+
+app.get("/*", serveIndexFile);
+app.get("/profile", serveIndexFile);
+app.get("/projects", serveIndexFile);
+app.get("/projects/:id", serveIndexFile);
+app.get("/chat", serveIndexFile);
+
 const PORT = 5000;
 connectionDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Server is running at port ${PORT}`)
+        console.log(`Server is running at https://localhost:${PORT}`)
     })
 });

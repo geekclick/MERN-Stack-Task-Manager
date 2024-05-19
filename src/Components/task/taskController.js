@@ -7,7 +7,7 @@ class TaskController {
         try {
             const token = decodeToken(req.headers)
             if (token) {
-                const task = await taskService.taskList();
+                const task = await taskService.taskList(token);
                 if (task) {
                     return createResponse(res, 200, "Got task list!", task, 200)
                 } else {
@@ -25,7 +25,6 @@ class TaskController {
         try {
             const token = decodeToken(req.headers)
             if (token) {
-                console.log(req.body)
                 const task = await taskService.addTask({
                     ...req.body,
                     user_id: token?._id

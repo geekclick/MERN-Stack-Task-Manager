@@ -23,10 +23,13 @@ class TaskService {
         } else return null
     }
 
-    async taskList() {
-        const task = await Task.find()
+    async taskList(token) {
+        const task = await Task.find();
         if (task) {
-            return task
+            const userTasks = task.filter((t) => t.assigned_to[0] == token._id);
+            console.log(token, "yehwala")
+            console.log(userTasks, "yehwala")
+            return userTasks;
         } else return null
     }
 
@@ -38,7 +41,6 @@ class TaskService {
     }
 
     async updateTask(body) {
-        console.log(body)
         const task = await Task.findOne({ _id: body._id })
         if (task) {
             const updated = {
@@ -64,11 +66,8 @@ class TaskService {
     }
 
     async searchTask(query) {
-        console.log(query)
         const regex = new RegExp(query, 'i');
-        console.log(regex)
         const task = await Task.find({ title: { $regex: regex } })
-        console.log(task)
         if (task) {
             return task
         } else null

@@ -1,4 +1,4 @@
-import { Calendar, DeleteIcon, PencilLine, Target } from "lucide-react";
+import { Calendar, DeleteIcon, Target } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask } from "@/services/task-services";
 import { Project, StatusColor, Task } from "@/interfaces/task-interfaces";
@@ -30,7 +30,7 @@ function TaskCard(props: Task) {
   const projects = useSelector(
     (state: RootState) => state.projectSlice.projects
   );
-  const taskProject = projects.filter(
+  const taskProject: Project = projects.filter(
     (item: Project) => item._id === props.project
   )[0];
   return (

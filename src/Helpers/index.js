@@ -7,7 +7,6 @@ exports.createValidationResponse = (res, errors) => {
 };
 
 exports.createResponse = (res, status, message, data, statusCode) => {
-    console.log(data)
     return res.status(status).json({ status: statusCode, message, data });
 };
 

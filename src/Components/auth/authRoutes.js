@@ -5,7 +5,7 @@ const validate = require('../../Middlewares/validate-middleware');
 const { signupSchema, loginSchema } = require('./authValidations'); // Destructure schemas
 
 router.get("/", (req, res) => {
-    console.log("object")
+    ("object")
     authController.home(req, res);
 });
 

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import NoTasks from "./NoTasks";
 import { Task } from "@/interfaces/task-interfaces";
 import useCurrentPath from "@/hooks/useCurrentPath";
-import TaskPreview from "./TaskPreview";
 
 function Tasks() {
   const currentPath = useCurrentPath(2) || "all-tasks";

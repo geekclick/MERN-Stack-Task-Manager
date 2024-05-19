@@ -8,7 +8,6 @@ class ProjectController {
     async addProject(req, res) {
         try {
             const token = decodeToken(req.headers)
-            console.log(token)
             if (token) {
                 const project = await projectService.addProject({
                     ...req.body,
@@ -31,7 +30,7 @@ class ProjectController {
         try {
             const token = decodeToken(req.headers)
             if (token) {
-                const project = await projectService.projectList()
+                const project = await projectService.projectList(token)
                 if (project) {
                     return createResponse(res, 200, "Got Project List", project, 200)
                 } else {

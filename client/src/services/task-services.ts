@@ -2,24 +2,17 @@ import { createHeaders } from "@/helpers";
 import { Task } from "@/interfaces/task-interfaces";
 import { setTaskList } from "@/store/reducers/taskSlice";
 import axios, { AxiosError } from "axios";
-import { FormEvent } from "react";
 import { Dispatch } from "redux";
 
 export const getTaskList = async (dispatch: Dispatch<any>) => {
   try {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const headers = {
-        authorization: `Bearer ${token}`,
-      };
-      const response = await axios.get(`${window.location.origin}/api/tasks`, {
-        headers,
-      });
-      if (response) {
-        dispatch(setTaskList(response.data.data));
-      }
-    }
-    return null;
+    const headers = createHeaders();
+    const response = await axios.get(`${window.location.origin}/api/tasks`, {
+      headers,
+    });
+    if (response) {
+      dispatch(setTaskList(response.data.data));
+    } else return null;
   } catch (error) {
     dispatch(setTaskList([]));
     if (axios.isAxiosError(error)) {
@@ -40,7 +33,11 @@ export const addTask = async (
 ) => {
   try {
     const headers = createHeaders();
-    const response = await axios.post(`${window.location.origin}/api/tasks`, task, { headers });
+    const response = await axios.post(
+      `${window.location.origin}/api/tasks`,
+      task,
+      { headers }
+    );
     if (response) {
       getTaskList(dispatch);
       navigate("/dashboard");
@@ -53,9 +50,13 @@ export const addTask = async (
 export const editTask = async (dispatch: Dispatch<any>, task: Task) => {
   try {
     const headers = createHeaders();
-    const response = await axios.put(`${window.location.origin}/api/tasks/`, task, {
-      headers,
-    });
+    const response = await axios.put(
+      `${window.location.origin}/api/tasks/`,
+      task,
+      {
+        headers,
+      }
+    );
     if (response) {
       getTaskList(dispatch);
     }
@@ -67,8 +68,13 @@ export const editTask = async (dispatch: Dispatch<any>, task: Task) => {
 export const removeTask = async (dispatch: Dispatch<any>, props: Task) => {
   try {
     const headers = createHeaders();
-    const response = await axios.delete(`${window.location.origin}/api/tasks/${props._id}`, { headers });
-    getTaskList(dispatch);
+    const response = await axios.delete(
+      `${window.location.origin}/api/tasks/${props._id}`,
+      { headers }
+    );
+    if (response) {
+      getTaskList(dispatch);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -77,9 +83,12 @@ export const removeTask = async (dispatch: Dispatch<any>, props: Task) => {
 export const searchTask = async (dispatch: Dispatch<any>, query: string) => {
   try {
     const headers = createHeaders();
-    const response = await axios.get(`${window.location.origin}/api/tasks/search?q=${query}`, {
-      headers,
-    });
+    const response = await axios.get(
+      `${window.location.origin}/api/tasks/search?q=${query}`,
+      {
+        headers,
+      }
+    );
     if (response) {
       dispatch(setTaskList(response.data.data));
     }
