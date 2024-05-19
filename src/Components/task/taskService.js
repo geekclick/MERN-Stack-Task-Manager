@@ -27,8 +27,6 @@ class TaskService {
         const task = await Task.find();
         if (task) {
             const userTasks = task.filter((t) => t.assigned_to[0] == token._id);
-            console.log(token, "yehwala")
-            console.log(userTasks, "yehwala")
             return userTasks;
         } else return null
     }
@@ -65,11 +63,12 @@ class TaskService {
         } else return null;
     }
 
-    async searchTask(query) {
-        const regex = new RegExp(query, 'i');
+    async searchTask(payload) {
+        const regex = new RegExp(payload.query, 'i');
         const task = await Task.find({ title: { $regex: regex } })
         if (task) {
-            return task
+            const userTasks = task.filter((t) => t.assigned_to[0] == payload._id)
+            return userTasks
         } else null
     }
 }

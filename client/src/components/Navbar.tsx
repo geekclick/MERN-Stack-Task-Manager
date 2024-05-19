@@ -10,9 +10,7 @@ import Login from "./Login";
 import { Button } from "./ui/button";
 import { Menu, PlusIcon } from "lucide-react";
 import { setSidebar } from "@/store/reducers/sidebarSlice";
-import AddTask from "./AddTask";
 import AddProject from "./AddProject";
-import Notification from "./Notification";
 import { RootState } from "@/interfaces/task-interfaces";
 import useCurrentPath from "@/hooks/useCurrentPath";
 import NewTask from "./NewTask";
@@ -35,7 +33,6 @@ function Navbar() {
         </h1>
       </div>
       <div className="flex items-center gap-[20px]">
-        <Notification />
         {currentPath != "projects" ? (
           <>
             {isLoggedIn && (

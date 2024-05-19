@@ -13,8 +13,11 @@ export const createHeaders = () => {
 export const sort = (value: string, taskList: Task[], dispatch: Dispatch) => {
   const sortCriteria: { [key: string]: (a: Task, b: Task) => number } = {
     name: (a, b) => a.title.localeCompare(b.title),
-    date: (a, b) =>
-      new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime(),
+    date: (a, b) => {
+      const dateA = a.createdDate ? new Date(a.createdDate).getTime() : 0;
+      const dateB = b.createdDate ? new Date(b.createdDate).getTime() : 0;
+      return dateA - dateB;
+    },
   };
 
   const sortBy =

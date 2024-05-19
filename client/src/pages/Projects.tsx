@@ -22,7 +22,8 @@ function Projects() {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 xl:grid-cols-5 lg:self-auto self-center gap-10 w-full h-full justify-center">
           {project.related_tasks?.length > 0 ? (
             project.related_tasks.map((task: Task, i) => (
-              <TaskCard key={i} {...task} />
+              // <TaskCard key={i} {...task} />
+              <div>yehi galat hai</div>
             ))
           ) : (
             <h2>No tasks for this project</h2>

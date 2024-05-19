@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import Login from "./Login";
 import { Button } from "./ui/button";
-import { Link } from "@/interfaces/task-interfaces";
 import ProjectTemplate from "./ProjectTemplate";
 
 function Sidebar() {

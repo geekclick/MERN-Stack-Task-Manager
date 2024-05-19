@@ -36,6 +36,6 @@ app.get("/chat", serveIndexFile);
 const PORT = 5000;
 connectionDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Server is running at https://localhost:${PORT}`)
+        console.log(`Server is running at http://localhost:${PORT}`)
     })
 });

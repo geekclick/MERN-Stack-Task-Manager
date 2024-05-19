@@ -6,7 +6,6 @@ import {
   DeleteIcon,
   IndianRupee,
   PencilLine,
-  Target,
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 

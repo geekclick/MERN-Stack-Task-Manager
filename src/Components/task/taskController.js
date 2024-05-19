@@ -100,7 +100,10 @@ class TaskController {
         try {
             const token = decodeToken(req.headers)
             if (token) {
-                const task = await taskService.searchTask(req.query.q)
+                const task = await taskService.searchTask({
+                    _id: token._id,
+                    query: req.query.q
+                })
                 if (task) {
                     return createResponse(res, 200, "Task found", task, 200)
                 } else {

@@ -12,7 +12,10 @@ export const getProjectList = async (dispatch: Dispatch<any>) => {
       const headers = {
         authorization: `Bearer ${token}`,
       };
-      const response = await axios.get(`${window.location.origin}/api/projects`, { headers });
+      const response = await axios.get(
+        `${window.location.origin}/api/projects`,
+        { headers }
+      );
       if (response) {
         dispatch(setProjectList(response.data.data));
       }
@@ -39,9 +42,11 @@ export const addProject = async (
   e.preventDefault();
   try {
     const headers = createHeaders();
-    console.log(headers);
-    console.log(project);
-    const response = await axios.post(`${window.location.origin}/api/projects`, project, { headers });
+    const response = await axios.post(
+      `${window.location.origin}/api/projects`,
+      project,
+      { headers }
+    );
     if (response) {
       getProjectList(dispatch);
       navigate("/projects");
@@ -56,7 +61,10 @@ export const editProject = async (
   project: Project
 ) => {
   try {
-    const response = await axios.put(`${window.location.origin}/api/edit-project`, project);
+    const response = await axios.put(
+      `${window.location.origin}/api/edit-project`,
+      project
+    );
     if (response) {
       //   dispatch(createTask(project));
       getProjectList(dispatch);
@@ -72,10 +80,15 @@ export const removeProject = async (
 ) => {
   try {
     const headers = createHeaders();
-    const response = await axios.delete(`${window.location.origin}/api/projects/${props._id}`, {
-      headers,
-    });
-    getProjectList(dispatch);
+    const response = await axios.delete(
+      `${window.location.origin}/api/projects/${props._id}`,
+      {
+        headers,
+      }
+    );
+    if (response) {
+      getProjectList(dispatch);
+    }
   } catch (error) {
     console.log(error);
   }
