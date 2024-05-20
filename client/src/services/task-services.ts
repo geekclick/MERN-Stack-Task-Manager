@@ -3,6 +3,7 @@ import { Task } from "@/interfaces/task-interfaces";
 import { setTaskList } from "@/store/reducers/taskSlice";
 import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
+import { toast } from "react-toastify";
 
 export const getTaskList = async (dispatch: Dispatch<any>) => {
   try {
@@ -37,7 +38,7 @@ export const addTask = async (task: Task) => {
       }
     );
     if (response) {
-      console.log("Task added successfully!");
+      toast.success("Task added successfully!");
     }
   } catch (error) {
     console.log(error);
@@ -63,7 +64,7 @@ export const removeTask = async (props: Task) => {
       { headers }
     );
     if (response) {
-      console.log("Task removed successfully!");
+      toast.success("Task removed successfully!");
     }
   } catch (error) {
     console.log(error);
