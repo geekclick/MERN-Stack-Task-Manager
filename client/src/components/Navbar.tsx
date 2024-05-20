@@ -3,7 +3,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SearchBar from "./SearchBar";
 import ProfileImage from "@/assets/profile.png";
 import { useLocation } from "react-router-dom";
-// import { ModeToggle } from "./mode-toggle";
 import ProfileDropdown from "./ProfileDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
@@ -22,6 +21,7 @@ function Navbar() {
   const [animation, setAnimation] = useState("");
   const page = useLocation().pathname.split("/")[1];
   const { isLoggedIn } = useSelector((state: RootState) => state.authSlice);
+  const user = useSelector((state: RootState) => state.authSlice.user);
   return (
     <nav className="fixed z-10 flex lg:py-[24px] lg:px-[40px] px-[10px] justify-between items-center min-w-full h-[90px] bg-[#232529] border-b border-[#323539]">
       <div className="flex items-center">
@@ -74,7 +74,9 @@ function Navbar() {
           <ProfileDropdown>
             <Avatar>
               <AvatarImage src={ProfileImage} />
-              <AvatarFallback>PL</AvatarFallback>
+              <AvatarFallback>
+                {user.username?.at(0)?.toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </ProfileDropdown>
         ) : (

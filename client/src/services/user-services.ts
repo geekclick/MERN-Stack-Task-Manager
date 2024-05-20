@@ -29,7 +29,9 @@ export const profile = async (dispatch: Dispatch<any>) => {
     };
     const user = await axios.get(
       `${window.location.origin}/api/users/profile`,
-      { headers }
+      {
+        headers,
+      }
     );
     if (user) {
       dispatch(setUser(user.data.data));

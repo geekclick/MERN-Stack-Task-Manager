@@ -14,7 +14,7 @@ const dashboardLinks: DashboardLink[] = [
 ];
 
 function MainMenu() {
-  const currentPath = "/" + useCurrentPath(1);
+  const currentPath = "/" + useCurrentPath(1) && "/dashboard";
   return (
     <div>
       <p className="sidebarLinksTitle">MAIN MENU</p>

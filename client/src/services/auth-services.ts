@@ -13,7 +13,10 @@ class AuthServices {
   ) {
     e.preventDefault();
     try {
-      const response = await axios.post(`${window.location.origin}/api/auth/login`, payload);
+      const response = await axios.post(
+        `${window.location.origin}/api/auth/login`,
+        payload
+      );
       if (response) {
         const token = response.data.data.token;
         localStorage.setItem("token", token);
@@ -34,7 +37,10 @@ class AuthServices {
   ) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${window.location.origin}/api/auth/signup`, userInfo);
+      const response = await axios.post(
+        `${window.location.origin}/api/auth/signup`,
+        userInfo
+      );
       if (response) {
         const token = response.data.data.token;
         localStorage.setItem("token", token);

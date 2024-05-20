@@ -14,7 +14,9 @@ export const getProjectList = async (dispatch: Dispatch<any>) => {
       };
       const response = await axios.get(
         `${window.location.origin}/api/projects`,
-        { headers }
+        {
+          headers,
+        }
       );
       if (response) {
         dispatch(setProjectList(response.data.data));

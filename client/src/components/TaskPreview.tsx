@@ -11,42 +11,30 @@ import { Project, Task } from "@/interfaces/task-interfaces";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { RootState } from "@/store";
-import { useDispatch, useSelector } from "react-redux";
-import { FormEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { FormEvent, useRef, useState } from "react";
 import { handleChange } from "@/helpers/handleChange";
 import { Button } from "./ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { editTask } from "@/services/task-services";
+import useChangeColor from "@/hooks/useChangeColor";
 
 function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
-  const dispatch = useDispatch();
+  const closeRef = useRef<HTMLButtonElement | null>(null);
   const [task, setTask] = useState<Task>({ ...prop });
   const projects = useSelector(
     (state: RootState) => state.projectSlice.projects
   );
 
   const [statusColor, setStatusColor] = useState("gray");
-  useEffect(() => {
-    const changeColor = () => {
-      if (task?.task_status === "ongoing") {
-        setStatusColor("blue");
-      }
-      if (task?.task_status === "completed") {
-        setStatusColor("green");
-      }
-      if (task?.task_status === "upcoming") {
-        setStatusColor("yellow");
-      }
-      if (task?.task_status === "paused") {
-        setStatusColor("red");
-      }
-    };
-    changeColor();
-  }, [task?.task_status]);
+  useChangeColor(task, setStatusColor, false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editTask(dispatch, task);
+    editTask(task);
+    if (closeRef.current) {
+      closeRef.current.click();
+    }
   };
 
   return (
@@ -54,10 +42,10 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="bg-[#2a2d32] border-none text-white h-[90vh] rounded-lg lg:w-[90em] p-10">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col lg:space-y-10 space-y-4 rounded-lg">
+          <div className="flex flex-col space-y-20 rounded-lg">
             <div>
               <Textarea
-                className="bg-transparent text-2xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none h-fit resize-none"
+                className="bg-transparent text-xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none h-fit resize-none"
                 value={task?.title}
                 placeholder="Title"
                 name="title"
@@ -73,7 +61,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                   onChange={(e) => handleChange(e, setTask)}
                 />
               </div>
-              <div className=" space-y-4 lg:my-8 my-5">
+              <div className=" space-y-4 my-8">
                 <div className="flex flex-col justify-center">
                   <p className="text-sm mx-3 font-semibold text-gray-500">
                     Status
@@ -88,6 +76,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                   >
                     <SelectTrigger
                       className={`bg-transparent text-base font-semibold focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none text-${statusColor}-500`}
+                      autoFocus
                     >
                       <SelectValue placeholder="Select Status" />
                     </SelectTrigger>
@@ -142,22 +131,20 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                 className="bg-[#2a2d32] border-none h-[20vh] focus-visible:ring-0 focus-visible:ring-offset-0 font-poppins resize-none"
                 placeholder="Description"
                 value={task?.description}
-                autoFocus
               />
             </div>
           </div>
+          <Button
+            variant={"ghost"}
+            type="submit"
+            size={"sm"}
+            className="absolute bottom-8 right-8"
+          >
+            Save
+          </Button>
           <DialogClose asChild>
             <Button
-              variant={"ghost"}
-              type="submit"
-              size={"sm"}
-              className="absolute bottom-8 right-8"
-            >
-              Save
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button
+              ref={closeRef}
               variant={"ghost"}
               type="button"
               className="absolute bottom-8 border-none"

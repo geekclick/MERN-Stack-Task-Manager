@@ -11,21 +11,20 @@ import { ChildrenProps, Project, Task } from "@/interfaces/task-interfaces";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { RootState } from "@/store";
-import { useDispatch, useSelector } from "react-redux";
-import { FormEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { FormEvent, useRef, useState } from "react";
 import { handleChange } from "@/helpers/handleChange";
 import { Button } from "./ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { addTask } from "@/services/task-services";
-import { useNavigate } from "react-router-dom";
+import useChangeColor from "@/hooks/useChangeColor";
 
 function NewTask({ children }: ChildrenProps) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const closeRef = useRef<HTMLButtonElement | null>(null);
   const [task, setTask] = useState<Task>({
     title: "",
     description: "",
-    tags: "",
+    tags: [],
     project: "",
     assigned_to: [],
     task_status: "",
@@ -35,35 +34,22 @@ function NewTask({ children }: ChildrenProps) {
   );
 
   const [statusColor, setStatusColor] = useState("gray");
-  useEffect(() => {
-    const changeColor = () => {
-      if (task?.task_status === "ongoing") {
-        setStatusColor("blue");
-      }
-      if (task?.task_status === "completed") {
-        setStatusColor("green");
-      }
-      if (task?.task_status === "upcoming") {
-        setStatusColor("yellow");
-      }
-      if (task?.task_status === "paused") {
-        setStatusColor("red");
-      }
-    };
-    changeColor();
-  }, [task?.task_status]);
+  useChangeColor(task, setStatusColor, false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTask(dispatch, task, navigate);
+    addTask(task);
     setTask({
       title: "",
       description: "",
-      tags: "",
+      tags: [],
       project: "",
       assigned_to: [],
       task_status: "",
     });
+    if (closeRef.current) {
+      closeRef.current.click();
+    }
   };
 
   return (
@@ -74,7 +60,7 @@ function NewTask({ children }: ChildrenProps) {
           <div className="flex flex-col lg:space-y-10 space-y-3 rounded-lg">
             <div>
               <Textarea
-                className="bg-transparent text-2xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none resize-none"
+                className="bg-transparent text-xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none resize-none"
                 value={task?.title}
                 placeholder="Mobile Task Manager App"
                 name="title"
@@ -88,6 +74,7 @@ function NewTask({ children }: ChildrenProps) {
                   name="tags"
                   placeholder="React Native, Nodejs, Mongodb"
                   onChange={(e) => handleChange(e, setTask)}
+                  required
                 />
               </div>
               <div className=" space-y-4 lg:my-8 my-5">
@@ -162,18 +149,17 @@ function NewTask({ children }: ChildrenProps) {
               />
             </div>
           </div>
+          <Button
+            variant={"ghost"}
+            type="submit"
+            size={"sm"}
+            className="absolute bottom-8 right-8"
+          >
+            Create
+          </Button>
           <DialogClose asChild>
             <Button
-              variant={"ghost"}
-              type="submit"
-              size={"sm"}
-              className="absolute bottom-8 right-8"
-            >
-              Create
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button
+              ref={closeRef}
               variant={"ghost"}
               type="button"
               className="absolute bottom-8 border-none"

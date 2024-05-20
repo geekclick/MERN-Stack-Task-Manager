@@ -48,7 +48,7 @@ class TaskController {
             if (token) {
                 const task = await taskService.updateTask(req.body)
                 if (task) {
-                    return createResponse(res, 200, "Updated task details", 200)
+                    return createResponse(res, 200, "Updated task details", task, 200)
                 } else {
                     return createError(res, 400, "Unable to update task")
                 }

@@ -40,7 +40,7 @@ export interface Task {
   _id?: string;
   title: string;
   description: string;
-  tags: string | string[];
+  tags: string[];
   project: string;
   assigned_to: string[];
   task_status: string;

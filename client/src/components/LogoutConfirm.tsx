@@ -18,7 +18,7 @@ const LogoutConfirm: React.FC<ChildrenProps> = ({ children }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>{children}</AlertDialogTrigger>
-      <AlertDialogContent className="bg-dark">
+      <AlertDialogContent className="bg-[#232529] border-none">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white">
             Are you sure you wish to logout?
@@ -29,7 +29,7 @@ const LogoutConfirm: React.FC<ChildrenProps> = ({ children }) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Go Back</AlertDialogCancel>
+          <AlertDialogCancel className="text-black bg-transparent border-none">Go Back</AlertDialogCancel>
           <AlertDialogAction onClick={() => authServices.logout(dispatch)}>
             Log Out
           </AlertDialogAction>

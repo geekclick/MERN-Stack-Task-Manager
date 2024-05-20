@@ -3,13 +3,20 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 export const handleChange = (
   e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  setTask: Dispatch<SetStateAction<Task>> | undefined
+  setTask: Dispatch<SetStateAction<Task>>
 ) => {
   const { name, value } = e.target;
-  if (setTask) {
-    setTask((prevTask) => ({
-      ...prevTask,
-      [name]: value,
-    }));
-  }
+  setTask((prevTask) => {
+    if (name === "tags") {
+      return {
+        ...prevTask,
+        tags: value.split(",").map((tag) => tag.trim()),
+      };
+    } else {
+      return {
+        ...prevTask,
+        [name]: value,
+      };
+    }
+  });
 };

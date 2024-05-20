@@ -45,9 +45,11 @@ class TaskService {
                 title: body.title,
                 description: body.description,
                 tags: body.tags,
-                task_status: body.task_status
+                task_status: body.task_status,
+                assigned_to: body.assigned_to,
+                project: body.project
             }
-            const res = await Task.updateOne({ ...updated })
+            const res = await Task.updateOne({ _id: body._id }, updated)
             if (res) {
                 return updated
             } else return null

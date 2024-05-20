@@ -26,46 +26,36 @@ export const getTaskList = async (dispatch: Dispatch<any>) => {
   }
 };
 
-export const addTask = async (
-  dispatch: Dispatch<any>,
-  task: Task,
-  navigate: (arg0: string) => void
-) => {
+export const addTask = async (task: Task) => {
   try {
     const headers = createHeaders();
     const response = await axios.post(
       `${window.location.origin}/api/tasks`,
-      task,
-      { headers }
-    );
-    if (response) {
-      getTaskList(dispatch);
-      navigate("/dashboard");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const editTask = async (dispatch: Dispatch<any>, task: Task) => {
-  try {
-    const headers = createHeaders();
-    const response = await axios.put(
-      `${window.location.origin}/api/tasks/`,
       task,
       {
         headers,
       }
     );
     if (response) {
-      getTaskList(dispatch);
+      console.log("Task added successfully!");
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-export const removeTask = async (dispatch: Dispatch<any>, props: Task) => {
+export const editTask = async (task: Task) => {
+  try {
+    const headers = createHeaders();
+    await axios.put(`${window.location.origin}/api/tasks/`, task, {
+      headers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeTask = async (props: Task) => {
   try {
     const headers = createHeaders();
     const response = await axios.delete(
@@ -73,7 +63,7 @@ export const removeTask = async (dispatch: Dispatch<any>, props: Task) => {
       { headers }
     );
     if (response) {
-      getTaskList(dispatch);
+      console.log("Task removed successfully!");
     }
   } catch (error) {
     console.log(error);
