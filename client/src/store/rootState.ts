@@ -1,10 +1,9 @@
 import { combineReducers } from "redux";
-import authReducer from "./reducers/authSlice"; // Assuming you have an auth reducer file
-import taskReducer from "./reducers/taskSlice"; // Assuming you have an auth reducer file
-import sidebarReducer from "./reducers/sidebarSlice"; // Assuming you have an auth reducer file
-import projectReducer from "./reducers/projectSlice"; // Assuming you have an auth reducer file
-
-// Define RootState
+import authReducer from "./reducers/authSlice";
+import taskReducer from "./reducers/taskSlice";
+import sidebarReducer from "./reducers/sidebarSlice";
+import projectReducer from "./reducers/projectSlice";
+import loaderReducer from "./reducers/loaderSlice";
 
 // Combine reducers
 const rootReducer = combineReducers({
@@ -12,6 +11,7 @@ const rootReducer = combineReducers({
   taskSlice: taskReducer,
   sidebarSlice: sidebarReducer,
   projectSlice: projectReducer,
+  loaderSlice: loaderReducer,
   // Add other reducers here
 });
 

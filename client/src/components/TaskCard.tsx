@@ -31,7 +31,7 @@ function TaskCard(props: Task) {
       <div className="flex justify-between gap-8">
         {/* task header */}
         <h1 className="text-white text-[14px] font-poppins font-semibold">
-          {props.title[0].toUpperCase() + props.title.slice(1)}
+          {props.title[0]?.toUpperCase() + props.title?.slice(1)}
         </h1>
         <div className="flex space-x-2 w-10">
           <DeleteIcon
@@ -46,16 +46,16 @@ function TaskCard(props: Task) {
         <TaskPreview {...props}>
           <div>
             <p className="text-[#6C717B] text-[14px] font-poppins w-[80%]">
-              {props.description.length > 24
-                ? props.description[0].toUpperCase() +
-                  props.description.slice(1, 30) +
+              {props.description?.length > 24
+                ? props.description[0]?.toUpperCase() +
+                  props.description?.slice(1, 30) +
                   "..."
-                : props.description[0].toUpperCase() +
-                  props.description.slice(1)}
+                : props.description[0]?.toUpperCase() +
+                  props.description?.slice(1)}
             </p>
             <div className="flex gap-2 py-3 flex-wrap">
               {Array.isArray(props.tags)
-                ? props.tags.map((tag: string, i: number) =>
+                ? props.tags?.map((tag: string, i: number) =>
                     tag != "" ? (
                       <Badge
                         key={i}
@@ -93,7 +93,7 @@ function TaskCard(props: Task) {
             defaultValue={task?.task_status}
           >
             <SelectTrigger
-              className={`bg-transparent text-xs w-[85px] px-0 focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none text-${statusColor}-500`}
+              className={`bg-transparent text-xs w-[85px] px-0 focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none ${statusColor}`}
             >
               <SelectValue placeholder="Select Status" />
             </SelectTrigger>

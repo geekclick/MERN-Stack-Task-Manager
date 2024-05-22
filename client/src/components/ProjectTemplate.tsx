@@ -63,8 +63,8 @@ function ProjectTemplate({ title }: { title: string }) {
                     }`}
                   ></div>
                   <Link
-                    to={`/projects/${item.title
-                      .toLowerCase()
+                    to={`/projects/${item._id
+                      ?.toLowerCase()
                       .replace(" ", "-")}`}
                   >
                     {item.title}

@@ -75,7 +75,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                     defaultValue={task?.task_status}
                   >
                     <SelectTrigger
-                      className={`bg-transparent text-base font-semibold focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none text-${statusColor}-500`}
+                      className={`bg-transparent text-base font-semibold focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none ${statusColor}`}
                       autoFocus
                     >
                       <SelectValue placeholder="Select Status" />

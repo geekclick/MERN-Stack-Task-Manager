@@ -3,6 +3,7 @@ import { setIsLoggedIn } from "@/store/reducers/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FormEvent } from "react";
+import { toast } from "react-toastify";
 
 class AuthServices {
   async login(
@@ -23,6 +24,7 @@ class AuthServices {
         localStorage.getItem("token");
         dispatch(setIsLoggedIn(true));
         navigate("/");
+        toast.success("Login Successful!");
       }
     } catch (error) {
       console.log(error);
@@ -56,6 +58,7 @@ class AuthServices {
     try {
       localStorage.removeItem("token");
       dispatch(setIsLoggedIn(false));
+      toast.success("Log out Successful!");
     } catch (error) {
       console.log(error);
     }

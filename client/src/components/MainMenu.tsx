@@ -14,7 +14,8 @@ const dashboardLinks: DashboardLink[] = [
 ];
 
 function MainMenu() {
-  const currentPath = "/" + useCurrentPath(1) && "/dashboard";
+  const currentPath = "/" + useCurrentPath(1);
+  const setPath = currentPath == "/" ? "/dashboard" : currentPath;
   return (
     <div>
       <p className="sidebarLinksTitle">MAIN MENU</p>
@@ -27,9 +28,7 @@ function MainMenu() {
                 className="flex items-center mt-3 gap-1 justify-left text-[#6C717B] cursor-pointer text-[16px]"
               >
                 <span
-                  className={`${
-                    currentPath == item.link ? "text-primary" : ""
-                  }`}
+                  className={`${setPath == item.link ? "text-primary" : ""}`}
                 >
                   {item.icon}
                 </span>

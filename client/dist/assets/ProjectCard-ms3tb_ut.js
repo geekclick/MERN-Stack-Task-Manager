@@ -1,0 +1,11 @@
+import{c,u as n,j as e,D as x,r as p,C as i,p as l}from"./index-CfGEEXuk.js";/**
+ * @license lucide-react v0.312.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const r=c("IndianRupee",[["path",{d:"M6 3h12",key:"ggurg9"}],["path",{d:"M6 8h12",key:"6g4wlu"}],["path",{d:"m6 13 8.5 8",key:"u1kupk"}],["path",{d:"M6 13h3",key:"wdp6ag"}],["path",{d:"M9 13c6.667 0 6.667-10 0-10",key:"1nkvk2"}]]);/**
+ * @license lucide-react v0.312.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const h=c("PencilLine",[["path",{d:"M12 20h9",key:"t2du7b"}],["path",{d:"M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z",key:"ymcmye"}],["path",{d:"m15 5 3 3",key:"1w25hb"}]]);function m(s){var t,a;const d=n();return e.jsxs("div",{className:"flex flex-col gap-4 p-[20px] bg-[#2A2D32] w-full rounded-[16px] h-fit",children:[e.jsxs("div",{className:"flex justify-between gap-8",children:[e.jsx("h1",{className:"text-white text-[14px] font-poppins font-semibold",children:s.title[0].toUpperCase()+s.title.slice(1)}),e.jsxs("div",{className:"flex space-x-2 w-10",children:[e.jsx(h,{role:"button"}),e.jsx(x,{className:"text-red-500",onClick:()=>p(d,s),role:"button"})]})]}),e.jsxs("div",{className:"flex flex-col md:w-[215px] w-fit space-y-3",children:[e.jsx("p",{className:"text-[#6C717B] text-[14px] font-poppins w-full",children:s.description.length>50?s.description[0].toUpperCase()+s.description.slice(1,24)+"...":s.description[0].toUpperCase()+s.description.slice(1)}),e.jsxs("div",{className:"flex gap-2 py-3 flex-wrap justify-start items-center",children:[e.jsxs("p",{className:"text-sm flex",children:[e.jsx(r,{className:"scale-50"})," Budget:"]}),e.jsx("p",{children:s.budget})]}),e.jsxs("div",{className:"text-[15px] text-[#6C717B] space-y-2  ",children:[e.jsxs("div",{className:"flex gap-3",children:[e.jsx(i,{width:20}),e.jsx("p",{children:l(((t=s.start_date)==null?void 0:t.toString())||"")})]}),e.jsxs("div",{className:"flex gap-3",children:[e.jsx(i,{width:20}),e.jsx("p",{children:l(((a=s.end_date)==null?void 0:a.toString())||"")})]}),e.jsx("div",{className:"flex gap-3"})]})]})]})}export{m as default};

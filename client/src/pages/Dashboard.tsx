@@ -1,21 +1,26 @@
 import Tasks from "@/components/Tasks";
 import TaskHeader from "@/components/TaskHeader";
 import TaskStatus from "@/components/TaskStatus";
+import login from "@/assets/loginAlert.png";
 
 function Dashboard() {
   const hasToken = localStorage.getItem("token") !== null;
-  return (
-    <>
-      <TaskHeader />
-      <TaskStatus />
-      {hasToken ? (
+  if (hasToken) {
+    return (
+      <>
+        <TaskHeader />
+        <TaskStatus />
         <Tasks />
-      ) : (
-        <h1 className="text-center m-auto text-2xl">
-          Please Login to see your personalized tasks
-        </h1>
-      )}
-    </>
+      </>
+    );
+  }
+  return (
+    <div className="w-full flex flex-col justify-center items-center">
+      <img src={login} alt="login" />
+      <h1 className="text-center text-2xl">
+        Please Login to see your personalized tasks
+      </h1>
+    </div>
   );
 }
 

@@ -33,9 +33,9 @@ function Navbar() {
         </h1>
       </div>
       <div className="flex items-center gap-[20px]">
-        {currentPath != "projects" ? (
+        {isLoggedIn && (
           <>
-            {isLoggedIn && (
+            {currentPath != "projects" ? (
               <>
                 <NewTask>
                   <Button
@@ -56,15 +56,15 @@ function Navbar() {
                   </Button>
                 </NewTask>
               </>
+            ) : (
+              <AddProject>
+                <Button className="bg-transparent focus-visible:border-none md:flex hidden">
+                  <PlusIcon className="mx-1 scale-75" />
+                  New Project
+                </Button>
+              </AddProject>
             )}
           </>
-        ) : (
-          <AddProject>
-            <Button className="bg-transparent focus-visible:border-none md:flex hidden">
-              <PlusIcon className="mx-1 scale-75" />
-              New Project
-            </Button>
-          </AddProject>
         )}
         <div className="lg:block hidden">
           <SearchBar />

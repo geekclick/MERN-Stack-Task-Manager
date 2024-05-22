@@ -11,7 +11,7 @@ function useInit() {
   const isLoggedIn = useSelector(
     (state: RootState) => state.authSlice.isLoggedIn
   );
-  const tasks = useSelector((state: RootState) => state.taskSlice.tasks);
+  // const tasks = useSelector((state: RootState) => state.taskSlice.tasks);
   const headers = createHeaders();
   useEffect(() => {
     if (headers.authorization.slice(7) != "null") {
@@ -19,7 +19,7 @@ function useInit() {
       getTaskList(dispatch);
       profile(dispatch);
     }
-  }, [isLoggedIn, tasks]);
+  }, [isLoggedIn]);
   return;
 }
 

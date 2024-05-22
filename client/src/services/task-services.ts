@@ -4,8 +4,10 @@ import { setTaskList } from "@/store/reducers/taskSlice";
 import axios, { AxiosError } from "axios";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
+import { setLoader } from "@/store/reducers/loaderSlice";
 
 export const getTaskList = async (dispatch: Dispatch<any>) => {
+  dispatch(setLoader(true));
   try {
     const headers = createHeaders();
     const response = await axios.get(`${window.location.origin}/api/tasks`, {
@@ -24,6 +26,8 @@ export const getTaskList = async (dispatch: Dispatch<any>) => {
         console.error(error);
       }
     }
+  } finally {
+    dispatch(setLoader(false));
   }
 };
 

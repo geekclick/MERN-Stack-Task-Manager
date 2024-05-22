@@ -11,16 +11,16 @@ function useChangeColor(
     useEffect(() => {
       const changeColor = () => {
         if (task?.task_status === "ongoing") {
-          setStatusColor("blue");
+          setStatusColor("text-blue-500");
         }
         if (task?.task_status === "completed") {
-          setStatusColor("green");
+          setStatusColor("text-green-500");
         }
         if (task?.task_status === "upcoming") {
-          setStatusColor("yellow");
+          setStatusColor("text-yellow-500");
         }
         if (task?.task_status === "paused") {
-          setStatusColor("red");
+          setStatusColor("text-red-500");
         }
       };
       changeColor();
