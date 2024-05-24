@@ -1,5 +1,5 @@
 import { Loader } from "@/components/Loader";
-import TaskCard from "@/components/TaskCard";
+import TaskCard from "@/components/Task/TaskCard";
 import useCurrentPath from "@/hooks/useCurrentPath";
 import { Project, Task } from "@/interfaces/task-interfaces";
 import { RootState } from "@/store";
@@ -7,7 +7,7 @@ import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const ProjectCard = lazy(() => import("@/components/ProjectCard"));
+const ProjectCard = lazy(() => import("@/components/Project/ProjectCard"));
 
 function Projects() {
   const { id } = useParams();
@@ -38,7 +38,7 @@ function Projects() {
   }
 
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 xl:grid-cols-5 lg:self-auto self-center gap-10 w-full h-full justify-center">
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 xl:grid-cols-5 lg:self-auto self-center gap-10 w-full h-full justify-center pt-[30px]">
       {projects.length !== 0 && isLoggedIn ? (
         projects.map((project: Project) => (
           <Suspense fallback={<Loader key={project._id} />}>

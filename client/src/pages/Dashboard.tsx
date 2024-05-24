@@ -1,6 +1,6 @@
-import Tasks from "@/components/Tasks";
-import TaskHeader from "@/components/TaskHeader";
-import TaskStatus from "@/components/TaskStatus";
+import Tasks from "@/components/Task/Tasks";
+import TaskHeader from "@/components/Task/TaskHeader";
+import TaskStatus from "@/components/Task/TaskStatus";
 import login from "@/assets/loginAlert.png";
 
 function Dashboard() {

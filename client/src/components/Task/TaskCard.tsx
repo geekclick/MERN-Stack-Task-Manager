@@ -5,7 +5,7 @@ import { Project, Task } from "@/interfaces/task-interfaces";
 import { parseDate } from "@/helpers/parseDate";
 import { RootState } from "@/store";
 import TaskPreview from "./TaskPreview";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import {
   Select,
   SelectContent,

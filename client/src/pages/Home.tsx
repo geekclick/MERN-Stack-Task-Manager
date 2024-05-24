@@ -18,7 +18,7 @@ function Home() {
         }px transition-all`}
       >
         <Navbar />
-        <main className="flex flex-col gap-[40px] w-full min-h-screen px-[40px] py-[114px] bg-[#232529] text-white font-poppins">
+        <main className="flex flex-col gap-[40px] w-full min-h-screen px-[40px] py-[90px] bg-[#232529] text-white font-poppins">
           <Outlet />
         </main>
       </div>

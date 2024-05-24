@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Sort from "./Sort";
+import Sort from "../Sort";
 import useCurrentPath from "@/hooks/useCurrentPath";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 
 let links = [
   {
@@ -34,7 +34,7 @@ let links = [
 function TaskHeader() {
   const currentPath = useCurrentPath(2) || "all-tasks";
   return (
-    <div className="flex lg:flex-row flex-col space-y-10 lg:space-y-0 justify-between">
+    <div className="flex lg:flex-row flex-col space-y-10 lg:space-y-0 justify-between pt-[30px]">
       <div>
         <ul className="flex gap-[40px] overflow-x-auto whitespace-no-wrap ">
           {links.map((item, i) => {

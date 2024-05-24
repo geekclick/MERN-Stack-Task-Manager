@@ -6,22 +6,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import AddProject from "./AddProject";
-import { Project, Task } from "@/interfaces/task-interfaces";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
+import AddProject from "../Project/AddProject";
+import { ChildrenProps, Project, Task } from "@/interfaces/task-interfaces";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { FormEvent, useRef, useState } from "react";
 import { handleChange } from "@/helpers/handleChange";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { editTask } from "@/services/task-services";
+import { addTask } from "@/services/task-services";
 import useChangeColor from "@/hooks/useChangeColor";
 
-function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
+function NewTask({ children }: ChildrenProps) {
   const closeRef = useRef<HTMLButtonElement | null>(null);
-  const [task, setTask] = useState<Task>({ ...prop });
+  const [task, setTask] = useState<Task>({
+    title: "",
+    description: "",
+    tags: [],
+    project: "",
+    assigned_to: [],
+    task_status: "",
+  });
   const projects = useSelector(
     (state: RootState) => state.projectSlice.projects
   );
@@ -31,7 +38,15 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editTask(task);
+    addTask(task);
+    setTask({
+      title: "",
+      description: "",
+      tags: [],
+      project: "",
+      assigned_to: [],
+      task_status: "",
+    });
     if (closeRef.current) {
       closeRef.current.click();
     }
@@ -42,12 +57,12 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="bg-[#2a2d32] border-none text-white h-[90vh] rounded-lg lg:w-[90em] p-10">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col space-y-20 rounded-lg">
+          <div className="flex flex-col lg:space-y-10 space-y-3 rounded-lg">
             <div>
               <Textarea
-                className="bg-transparent text-xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none h-fit resize-none"
+                className="bg-transparent text-xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0 border-none resize-none"
                 value={task?.title}
-                placeholder="Title"
+                placeholder="Mobile Task Manager App"
                 name="title"
                 onChange={(e) => handleChange(e, setTask)}
               />
@@ -57,11 +72,12 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                   className="bg-transparent text-sm font-semibold focus-visible:ring-0 focus-visible:ring-offset-0 border-none text-gray-500"
                   value={task?.tags}
                   name="tags"
-                  placeholder="sql, python"
+                  placeholder="React Native, Nodejs, Mongodb"
                   onChange={(e) => handleChange(e, setTask)}
+                  required
                 />
               </div>
-              <div className=" space-y-4 my-8">
+              <div className=" space-y-4 lg:my-8 my-5">
                 <div className="flex flex-col justify-center">
                   <p className="text-sm mx-3 font-semibold text-gray-500">
                     Status
@@ -75,8 +91,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                     defaultValue={task?.task_status}
                   >
                     <SelectTrigger
-                      className={`bg-transparent text-base font-semibold focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none ${statusColor}`}
-                      autoFocus
+                      className={`bg-transparent text-base font-semibold focus:outline-none focus:ring-0 focus:ring-none focus:ring-offset-0 border-none text-${statusColor}-500`}
                     >
                       <SelectValue placeholder="Select Status" />
                     </SelectTrigger>
@@ -129,7 +144,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
                 name="description"
                 onChange={(e) => handleChange(e, setTask)}
                 className="bg-[#2a2d32] border-none h-[20vh] focus-visible:ring-0 focus-visible:ring-offset-0 font-poppins resize-none"
-                placeholder="Description"
+                placeholder="Create a mobile application for task management with features like creating tasks, setting deadlines, and prioritizing."
                 value={task?.description}
               />
             </div>
@@ -140,7 +155,7 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
             size={"sm"}
             className="absolute bottom-8 right-8"
           >
-            Save
+            Create
           </Button>
           <DialogClose asChild>
             <Button
@@ -158,4 +173,4 @@ function TaskPreview({ children, ...prop }: React.PropsWithChildren<Task>) {
   );
 }
 
-export default TaskPreview;
+export default NewTask;

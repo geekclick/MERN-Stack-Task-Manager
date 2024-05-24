@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { LogOut } from "lucide-react";
 import Logo from "./Logo";
 import MainMenu from "./MainMenu";
-import TaskTemplate from "./TaskTemplate";
-import LogoutConfirm from "./LogoutConfirm";
+import TaskTemplate from "./Task/TaskTemplate";
+import LogoutConfirm from "./Auth/LogoutConfirm";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-import Login from "./Login";
+import Login from "./Auth/Login";
 import { Button } from "./ui/button";
-import ProjectTemplate from "./ProjectTemplate";
+import ProjectTemplate from "./Project/ProjectTemplate";
 
 function Sidebar() {
   const sidebarOpen: Boolean = useSelector(
@@ -20,7 +20,7 @@ function Sidebar() {
       initial={{ x: -302 }} // Initial position outside of the viewport
       animate={{ x: sidebarOpen ? 0 : -302 }} // Slide in/out animation
       transition={{ duration: 0.3 }} // Animation duration
-      className="fixed z-20 h-full w-[302px] p-[24px] bg-[#1B1D21] flex flex-col space-y-6"
+      className="fixed z-50 h-full w-[302px] p-[24px] bg-[#1B1D21] flex flex-col space-y-6"
     >
       <Logo sidebarOpen={sidebarOpen} />
       <MainMenu />

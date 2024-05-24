@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import NoTasks from "./NoTasks";
 import { Task } from "@/interfaces/task-interfaces";
 import useCurrentPath from "@/hooks/useCurrentPath";
-import { Loader } from "./Loader";
+import { Loader } from "../Loader";
 
 // Add artificial delay for testing
 const TaskCard = lazy(() => import("./TaskCard"));

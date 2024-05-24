@@ -2,17 +2,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import SearchBar from "./SearchBar";
 import ProfileImage from "@/assets/profile.png";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import Login from "./Login";
+import Login from "./Auth/Login";
 import { Button } from "./ui/button";
-import { Menu, PlusIcon } from "lucide-react";
+import { Menu, MessageCircle, PlusIcon } from "lucide-react";
 import { setSidebar } from "@/store/reducers/sidebarSlice";
-import AddProject from "./AddProject";
+import AddProject from "./Project/AddProject";
 import { RootState } from "@/interfaces/task-interfaces";
 import useCurrentPath from "@/hooks/useCurrentPath";
-import NewTask from "./NewTask";
+import NewTask from "./Task/NewTask";
 import { useState } from "react";
 
 function Navbar() {
@@ -23,7 +23,7 @@ function Navbar() {
   const { isLoggedIn } = useSelector((state: RootState) => state.authSlice);
   const user = useSelector((state: RootState) => state.authSlice.user);
   return (
-    <nav className="fixed z-10 flex lg:py-[24px] lg:px-[40px] px-[10px] justify-between items-center min-w-full h-[90px] bg-[#232529] border-b border-[#323539]">
+    <nav className="fixed z-30 flex lg:py-[24px] lg:px-[40px] px-[10px] justify-between items-center min-w-full h-[90px] bg-[#232529] border-b border-[#323539]">
       <div className="flex items-center">
         <button onClick={() => dispatch(setSidebar(true))}>
           <Menu className="text-white" />
@@ -35,6 +35,9 @@ function Navbar() {
       <div className="flex items-center gap-[20px]">
         {isLoggedIn && (
           <>
+            <Link to={"/chats"}>
+              <MessageCircle className="text-white" />
+            </Link>
             {currentPath != "projects" ? (
               <>
                 <NewTask>
