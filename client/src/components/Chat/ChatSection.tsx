@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import io from "socket.io-client";
 
-const socket = io(`${window.location.origin}`);
+const socket = io();
 
 // Define the props for the ChatBubble component
 interface ChatBubbleProps {
