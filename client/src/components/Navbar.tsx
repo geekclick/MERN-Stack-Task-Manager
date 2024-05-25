@@ -2,12 +2,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import SearchBar from "./SearchBar";
 import ProfileImage from "@/assets/profile.png";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Auth/Login";
 import { Button } from "./ui/button";
-import { Menu, MessageCircle, PlusIcon } from "lucide-react";
+import { Menu, PlusIcon } from "lucide-react";
 import { setSidebar } from "@/store/reducers/sidebarSlice";
 import AddProject from "./Project/AddProject";
 import { RootState } from "@/interfaces/task-interfaces";
@@ -35,9 +35,6 @@ function Navbar() {
       <div className="flex items-center gap-[20px]">
         {isLoggedIn && (
           <>
-            <Link to={"/chats"}>
-              <MessageCircle className="text-white" />
-            </Link>
             {currentPath != "projects" ? (
               <>
                 <NewTask>

@@ -13,5 +13,4 @@ module.exports = (app, io) => {
     app.use("/api/tasks", taskRoutes);
     // app.use("/api/peer", peerRoutes);
     // app.use("/api/team", teamRoutes);
-    chatHandler(io)
 };

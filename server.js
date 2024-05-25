@@ -1,26 +1,21 @@
 const express = require('express');
-const { Server } = require("socket.io");
-const { createServer } = require("http");
 const errorMiddleware = require('./src/Middlewares/error-middleware');
 const connectionDB = require('./src/DB/db');
 const routes = require("./src/Routes/index");
 const cors = require('cors');
 
 const corsOptions = {
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: "POST, GET, DELETE, PATCH, HEAD, PUT",
     credentials: true,
 };
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server, {
-    cors: corsOptions,
-});
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(errorMiddleware);
-routes(app, io);
+routes(app);
 
 const path = require("path");
 const clientDistPath = path.resolve(__dirname, "client", "dist");
@@ -38,7 +33,7 @@ app.get("/chat", serveIndexFile);
 
 const PORT = 5000;
 connectionDB().then(() => {
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log(`Server is running at http://localhost:${PORT}`);
     });
 });

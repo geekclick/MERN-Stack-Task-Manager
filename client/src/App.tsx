@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
-import Chats from "./pages/Chats";
 import Profile from "./pages/Profile";
 import useInit from "./hooks/useInit";
 
@@ -20,7 +19,7 @@ function App() {
             <Route path="/dashboard/*" element={<Dashboard />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<Projects />} />
-            <Route path="/chats" element={<Chats />} />
+            {/* <Route path="/chats" element={<Chats />} /> */}
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>

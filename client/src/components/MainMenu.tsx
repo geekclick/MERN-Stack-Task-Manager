@@ -1,6 +1,6 @@
 import useCurrentPath from "@/hooks/useCurrentPath";
 import { DashboardLink } from "@/interfaces/task-interfaces";
-import { LayoutDashboard, Clipboard, MessageCircle } from "lucide-react";
+import { LayoutDashboard, Clipboard } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const dashboardLinks: DashboardLink[] = [
@@ -10,7 +10,6 @@ const dashboardLinks: DashboardLink[] = [
     link: "/dashboard",
   },
   { label: "Projects", icon: <Clipboard />, link: "/projects" },
-  { label: "Chat", icon: <MessageCircle />, link: "/chats" },
 ];
 
 function MainMenu() {
