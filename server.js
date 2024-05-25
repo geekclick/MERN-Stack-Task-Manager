@@ -29,7 +29,6 @@ app.get("/*", serveIndexFile);
 app.get("/profile", serveIndexFile);
 app.get("/projects", serveIndexFile);
 app.get("/projects/:id", serveIndexFile);
-app.get("/chat", serveIndexFile);
 
 const PORT = 5000;
 connectionDB().then(() => {
