@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Bell, Heart, Search, SendHorizontal } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -39,16 +39,12 @@ const ChatSection: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    socket.on("message", (msg: string) => {
-      // Added type for msg
-      setMessages((prevMessages) => [...prevMessages, msg]);
-    });
+  socket.on("message", (msg: string) => {
+    // Added type for msg
+    setMessages((prevMessages) => [...prevMessages, msg]);
+  });
 
-    return () => {
-      socket.off("message"); // Changed to 'message'
-    };
-  }, []); // Removed dependencies
+  // socket.off("message"); // Changed to 'message'
 
   return (
     <div className="h-fit flex flex-col">
